@@ -11,12 +11,17 @@ class Zona(models.Model):
         return self.nombre
 
 class Categoria(models.Model):
+    class Meta:
+        verbose_name = "categoría"
+        verbose_name_plural = "categorías"
     nombre = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nombre
 
 class Lugar(models.Model):
+    class Meta:
+        verbose_name_plural = "lugares"
     nombre = models.CharField(max_length=120)
     zona = models.ForeignKey(Zona, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)

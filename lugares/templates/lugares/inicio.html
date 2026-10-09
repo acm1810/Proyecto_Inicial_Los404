@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Valparaíso Oculto</title>
+</head>
+<body>
+    <h1>Elige una zona</h1>
+    <ul>
+        {% for zona in zonas %}
+            <li>{{ zona.nombre }} — {{ zona.frase }}</li>
+        {% empty %}
+            <li>Todavía no hay zonas.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
