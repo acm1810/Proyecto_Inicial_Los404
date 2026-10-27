@@ -37,6 +37,7 @@ class Lugar(models.Model):
     como_llegar = models.TextField(blank=True)
     revisado = models.DateField(null=True, blank=True)
     destacado = models.BooleanField(default=False)
+    imagen = models.ImageField(upload_to="lugares/", blank=True)
 
     def __str__(self):
         return self.nombre
