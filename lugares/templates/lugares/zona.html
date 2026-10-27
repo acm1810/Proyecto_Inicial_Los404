@@ -8,6 +8,13 @@
         <a href="{% url 'inicio' %}">Volver al inicio</a>
         <h1>{{ zona.nombre }}</h1>
         <p>{{ zona.descripcion }}</p>
+        <p>
+            Filtrar por categoría:
+           <a href="{% url 'zona' zona.id %}">Todas</a>
+           {% for categoria in categorias %}
+               | <a href="?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
+           {% endfor %}
+       </p>
         <ul>
             {% for lugar in lugares %}
                 <li><a href="{% url 'lugar' lugar.id %}">{{ lugar.nombre }}</a> — {{ lugar.resumen }}</li>
