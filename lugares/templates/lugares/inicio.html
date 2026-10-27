@@ -8,7 +8,7 @@
     <h1>Elige una zona</h1>
     <ul>
         {% for zona in zonas %}
-            <li>{{ zona.nombre }} — {{ zona.frase }}</li>
+            <li><a href="{% url 'zona' zona.id %}">{{ zona.nombre }}</a> — {{ zona.frase }}</li>
         {% empty %}
             <li>Todavía no hay zonas.</li>
         {% endfor %}

@@ -1,0 +1,19 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ zona.nombre }}</title>
+    </head>
+    <body>
+        <a href="{% url 'inicio' %}">Volver al inicio</a>
+        <h1>{{ zona.nombre }}</h1>
+        <p>{{ zona.descripcion }}</p>
+        <ul>
+            {% for lugar in lugares %}
+                <li><a href="{% url 'lugar' lugar.id %}">{{ lugar.nombre }}</a> — {{ lugar.resumen }}</li>
+            {% empty %}
+                <li>Todavía no hay lugares en esta zona.</li>
+            {% endfor %}
+        </ul>
+    </body>
+    </html>
