@@ -1,26 +1,46 @@
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>{{ zona.nombre }}</title>
-    </head>
-    <body>
-        <a href="{% url 'inicio' %}">Volver al inicio</a>
-        <h1>{{ zona.nombre }}</h1>
-        <p>{{ zona.descripcion }}</p>
-        <p>
-            Filtrar por categoría:
-           <a href="{% url 'zona' zona.id %}">Todas</a>
-           {% for categoria in categorias %}
-               | <a href="?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
-           {% endfor %}
-       </p>
-        <ul>
-            {% for lugar in lugares %}
-                <li><a href="{% url 'lugar' lugar.id %}">{{ lugar.nombre }}</a> — {{ lugar.resumen }}</li>
-            {% empty %}
-                <li>Todavía no hay lugares en esta zona.</li>
-            {% endfor %}
-        </ul>
-    </body>
-    </html>
+{% extends "lugares/base.html" %}
+{% block titulo %}{{ zona.nombre }}{% endblock %}
+
+{% block contenido %}
+<h1>{{ zona.nombre }}</h1>
+<p>{{ zona.frase }}</p>
+<p>{{ zona.descripcion }}</p>
+
+<!-- Formulario del Buscador y Comuna -->
+<form method="get">
+    <input type="search" name="q" placeholder="Buscar en {{ zona.nombre }}">
+    <select name="comuna">
+        <option value="">Todas las comunas</option>
+        {% for comuna in comunas %}
+            <option value="{{ comuna }}">{{ comuna }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Buscar</button>
+</form>
+
+<!-- Barra de Filtros por Categoría -->
+<div class="filtros">
+    {% for categoria in categorias %}
+        <a href="?categoria={{ categoria.id }}" {% if categoria.id|stringformat:"s" == elegida %}class="activa"{% endif %}>
+            {{ categoria.nombre }}
+        </a>
+    {% endfor %}
+</div>
+
+<!-- Listado de lugares en tarjetas -->
+<div class="contenedor-tarjetas">
+    {% for lugar in lugares %}
+        <div class="tarjeta">
+            <a href="{% url 'lugar' lugar.id %}">
+                {% if lugar.imagen %}
+                    <img src="{{ lugar.imagen.url }}" alt="{{ lugar.nombre }}">
+                {% endif %}
+                <h3>{{ lugar.nombre }}</h3>
+                <p>{{ lugar.resumen }}</p>
+            </a>
+        </div>
+    {% empty %}
+        <p>No se encontraron lugares en esta categoría o búsqueda.</p>
+    {% endfor %}
+</div>
+{% endblock %}
