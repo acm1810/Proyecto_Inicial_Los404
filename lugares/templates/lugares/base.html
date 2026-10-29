@@ -1,18 +1,33 @@
-base.html
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block titulo %}Valparaíso Oculto{% endblock %} · Valparaíso Oculto</title>
+
+    <title>
+        {% block title %}
+        Turismo Chile
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'lugares/estilos.css' %}">
 </head>
+
 <body>
-    <header>
-        <a href="{% url 'inicio' %}">Valparaíso Oculto</a>
-    </header>
-    <main>
-        {% block contenido %}{% endblock %}
-    </main>
+
+<header>
+    <h1>Turismo Chile</h1>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>Proyecto Turismo</p>
+</footer>
+
 </body>
 </html>
