@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Valparaíso Oculto</title>
-</head>
-<body>
-    <h1>Elige una zona</h1>
-    <ul>
-        {% for zona in zonas %}
-            <li><a href="{% url 'zona' zona.id %}">{{ zona.nombre }}</a> — {{ zona.frase }}</li>
-        {% empty %}
-            <li>Todavía no hay zonas.</li>
+<form method="GET" action="{% url 'inicio' %}" class="busqueda-form">
+    <input type="text" name="q" placeholder="Buscar atractivo o palabra clave..." value="">
+    
+    <select name="zona">
+        <option value="">Todas las Zonas</option>
+        {% for z in zonas %}
+            <option value="{{ z.id }}" {% if zona_id == z.id|stringformat:"s" %}selected{% endif %}>
+                {{ z.nombre }}
+            </option>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </select>
+
+    <select name="categoria">
+        <option value="">Todas las Categorías</option>
+        {% for cat in categorias %}
+            <option value="{{ cat.id }}" {% if categoria_id == cat.id|stringformat:"s" %}selected{% endif %}>
+                {{ cat.nombre }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Buscar</button>
+</form>
+
+<p><strong>Resultados encontrados:</strong> {{ total_resultados }}</p>
