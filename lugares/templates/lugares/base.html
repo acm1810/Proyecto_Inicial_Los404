@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <title>
+        {% block title %}
+        Turismo Chile
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'lugares/estilos.css' %}">
+</head>
+
+<body>
+
+<header>
+    <h1>Turismo Chile</h1>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>Proyecto Turismo</p>
+</footer>
+
+</body>
+</html>
