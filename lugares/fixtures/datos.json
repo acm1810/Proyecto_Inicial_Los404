@@ -1,0 +1,484 @@
+[
+{
+    "model": "lugares.zona",
+    "pk": 1,
+    "fields": {
+        "nombre": "Valparaíso",
+        "frase": "Más allá del puerto: caletas y viñas",
+        "comunas": "Valparaíso, Viña de Mar, Concón, Quintero, Puchucaví, Casablanca, Juan Fernandez",
+        "descripcion": "La Provincia de Valparaíso es una de las divisiones administrativas más importantes de la Región de Valparaíso, concentrando gran parte de la actividad económica, portuaria, administrativa y demográfica de toda la zona central costera de Chile. Se extiende a lo largo de un dinámico borde costero y valles interiores cercanos al mar.",
+        "orden": 0
+    }
+},
+{
+    "model": "lugares.zona",
+    "pk": 2,
+    "fields": {
+        "nombre": "Petorca",
+        "frase": "Playas tranquilas y valles interiores",
+        "comunas": "La Ligua, Petora, Cabildo, Zapallar, Papudo",
+        "descripcion": "La Provincia de Petorca es una de las divisiones administrativas que conforman la , situada en el extremo norte de la misma. Limita con la Región de Coquimbo y se extiende desde la cordillera de los Andes hasta la costa del Pacífico, integrando valles transversales de gran riqueza histórica y paisajística",
+        "orden": 0
+    }
+},
+{
+    "model": "lugares.zona",
+    "pk": 3,
+    "fields": {
+        "nombre": "San Antonio",
+        "frase": "El litoral de los poetas",
+        "comunas": "San Antonio, Cartagena, El Tabo, El Quisco, Algarrobo, Santo Domingo",
+        "descripcion": "La Provincia de San Antonio es una de las ocho divisiones administrativas que conforman la Región de Valparaíso, ubicada en el sector costero sur de la región. Se extiende a lo largo de una franja litoral de gran importancia estratégica, conectando valles agrícolas de la zona central con el Océano Pacífico.",
+        "orden": 0
+    }
+},
+{
+    "model": "lugares.zona",
+    "pk": 4,
+    "fields": {
+        "nombre": "San Felipe de Aconcagua",
+        "frase": "Pueblos patrimoniales en el valle",
+        "comunas": "San Felipe, llaillay, Putaendo, Santa María, Catemu, Panquehue",
+        "descripcion": "La Provincia de San Antonio es una de las ocho divisiones administrativas que conforman la Región de Valparaíso, ubicada en el sector costero sur de la región. Se extiende a lo largo de una franja litoral de gran importancia estratégica, conectando valles agrícolas de la zona central con el Océano Pacífico.",
+        "orden": 0
+    }
+},
+{
+    "model": "lugares.zona",
+    "pk": 5,
+    "fields": {
+        "nombre": "Los Andes",
+        "frase": "Cordillera, nieve y montaña",
+        "comunas": "Los Andes, Calle Larga, Rinconda, San Esteban",
+        "descripcion": "La Provincia de Los Andes es una de las divisiones administrativas estratégicas de la Región de Valparaíso, ubicada en el extremo oriental de la región, en pleno Valle del Aconcagua y al pie de la majestuosa Cordillera de los Andes. Limita al este con Argentina y al sur con la Región Metropolitana, constituyendo la principal puerta de entrada y salida terrestre del país con el resto del continente.",
+        "orden": 0
+    }
+},
+{
+    "model": "lugares.zona",
+    "pk": 6,
+    "fields": {
+        "nombre": "Quillota",
+        "frase": "Valle fértil y cerro para caminar",
+        "comunas": "Quillota, La Calera, la Cruz, Hijuelas, Nogales",
+        "descripcion": "La Provincia de Quillota es una de las divisiones administrativas de la Región de Valparaíso, situada estratégicamente en el corazón de los valles interiores de la zona central de Chile. Conecta la depresión intermedia con las cuencas fluviales que descienden desde la cordillera hacia la costa.",
+        "orden": 0
+    }
+},
+{
+    "model": "lugares.zona",
+    "pk": 7,
+    "fields": {
+        "nombre": "Marga Marga",
+        "frase": "Campo y cerro cerca de la costa",
+        "comunas": "Quilpué, Vilaa Alemana, Limache, Olmué",
+        "descripcion": "La Provincia de Marga Marga es una de las divisiones administrativas de la Región de Valparaíso, ubicada en el sector interior inmediato de la zona central de la región. Fue creada oficialmente en 2010 a partir de la reestructuración territorial de comunas pertenecientes a las provincias de Valparaíso y Quillota.",
+        "orden": 0
+    }
+},
+{
+    "model": "lugares.zona",
+    "pk": 8,
+    "fields": {
+        "nombre": "Isla de Pascua",
+        "frase": "Cultura rapanui en pleno Pacífico",
+        "comunas": "Isla de Pascua",
+        "descripcion": "La Provincia de Isla de Pascua (conocida ancestralmente como Rapa Nui) es una provincia especial de Chile ubicada en la Polinesia, en medio del Océano Pacífico, y forma parte de la Región de Valparaíso. Es uno de los territorios más aislados y fascinantes del planeta, reconocido mundialmente por su enigmática cultura ancestral y su imponente aislamiento geográfico.",
+        "orden": 0
+    }
+},
+{
+    "model": "lugares.categoria",
+    "pk": 1,
+    "fields": {
+        "nombre": "Naturaleza"
+    }
+},
+{
+    "model": "lugares.categoria",
+    "pk": 2,
+    "fields": {
+        "nombre": "Playas y caletes"
+    }
+},
+{
+    "model": "lugares.categoria",
+    "pk": 3,
+    "fields": {
+        "nombre": "Patrimonio"
+    }
+},
+{
+    "model": "lugares.categoria",
+    "pk": 4,
+    "fields": {
+        "nombre": "Gastronmía"
+    }
+},
+{
+    "model": "lugares.categoria",
+    "pk": 5,
+    "fields": {
+        "nombre": "Enoturismo"
+    }
+},
+{
+    "model": "lugares.categoria",
+    "pk": 6,
+    "fields": {
+        "nombre": "Alojamiento"
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 2,
+    "fields": {
+        "nombre": "Las Docas",
+        "zona": 1,
+        "categoria": 2,
+        "comuna": "Valparaíso",
+        "resumen": "Acantilados vírgenes y recónditos y bahías de un azul intenso",
+        "descripcion": "Playa salvaje alejada del bullicio urbano, a la que se accede por senderos de tierra. Rodeada de acantilados y vegetación nativa, ideal para caminatas tranquilas y fotografía.",
+        "direccion": "Acantilados costeros de Valparaíso",
+        "horario": "Abierto 24 horas",
+        "precio": "Gratuito",
+        "contacto": "",
+        "sitio_web": "https://www.playasdechile.com/playa-las-docas/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 3,
+    "fields": {
+        "nombre": "Acantilados Federico Santa María",
+        "zona": 1,
+        "categoria": 1,
+        "comuna": "Valparaiso",
+        "resumen": "Mirador natural sobre la inmensidad del Pacífico",
+        "descripcion": "Santuario de la naturaleza ubicado sobre los acantilados costeros. Conserva un ecosistema virgen ideal para la observación de aves marinas y atardeceres espectaculares.",
+        "direccion": "Borde costero acantilado, Valparaíso",
+        "horario": "Abierto 24 horas",
+        "precio": "Gratuito",
+        "contacto": "",
+        "sitio_web": "https://www.monumentos.gob.cl/monumentos/santuarios-de-la-naturaleza/acantilados-federico-santa-maria",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 4,
+    "fields": {
+        "nombre": "Embalse Aromo",
+        "zona": 7,
+        "categoria": 1,
+        "comuna": "Limache",
+        "resumen": "Tranquilo embalse rodeado de colinas interiores",
+        "descripcion": "Embalse interior rodeado de cerros y vegetación rural en Limache. Muy poco concurrido, perfecto para la pesca recreativa, un picnic en la orilla y disfrutar del paisaje.",
+        "direccion": "Sector rural de Limache",
+        "horario": "Abierto 24 horas",
+        "precio": "Gratuito",
+        "contacto": "",
+        "sitio_web": "",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 5,
+    "fields": {
+        "nombre": "La Campana, Sector Cajón Grande National Park",
+        "zona": 7,
+        "categoria": 1,
+        "comuna": "Olmué",
+        "resumen": "Quebrada tranquila con palmas chilenas y arroyos",
+        "descripcion": "Sector del Parque Nacional mucho más tranquilo y prístino que el acceso principal. Cuenta con antiguos palmares nativos y arroyos de agua cristalina para caminatas en la naturaleza.",
+        "direccion": "F-668, Olmué",
+        "horario": "Consultar según temporada",
+        "precio": "Tarifa CONAF (Ingreso a Parque Nacional)",
+        "contacto": "(33) 244 3067",
+        "sitio_web": "https://www.conaf.cl/parque_nacionales/parque-nacional-la-campana/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 6,
+    "fields": {
+        "nombre": "Playa Las Cujas",
+        "zona": 3,
+        "categoria": 2,
+        "comuna": "Zapallar/Cachagua",
+        "resumen": "Pequeña cala oculta de rocas volcánicas y arena",
+        "descripcion": "Cala de aguas cristalinas y arenas finas flanqueada por rocas. Al no tener acceso vehicular directo, mantiene un ambiente íntimo para caminar y contemplar la fauna marina.",
+        "direccion": "Av. del Mar 524, Cachagua",
+        "horario": "Abierto 24 horas",
+        "precio": "Gratuito",
+        "contacto": "",
+        "sitio_web": "https://www.munizapallar.cl/lugares-de-interes",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 7,
+    "fields": {
+        "nombre": "El Yali National Reserve",
+        "zona": 3,
+        "categoria": 1,
+        "comuna": "Santo Domingo",
+        "resumen": "Humedal costero y reserva de aves marinas",
+        "descripcion": "Santuario de vida silvestre que combina humedales costeros y dunas. Es uno de los puntos de avistamiento de aves migratorias y autóctonas más importantes de la zona central.",
+        "direccion": "El Convento, Santo Domingo",
+        "horario": "Mar a Dom 9:00 - 18:00 (Lun cerrado)",
+        "precio": "Tarifa CONAF",
+        "contacto": "(35) 244 2772",
+        "sitio_web": "https://www.conaf.cl/parque_nacionales/reserva-nacional-el-yali/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 8,
+    "fields": {
+        "nombre": "Parque Los Naranjos de Hijuelas",
+        "zona": 6,
+        "categoria": 1,
+        "comuna": "Hijuelas",
+        "resumen": "Oasis de vertientes naturales y huertos de cítricos",
+        "descripcion": "Paraje rural con arroyos de vertientes naturales y frondosa sombra, rodeado de huertos de paltas y cítricos. Ideal para capear el calor en un entorno campesino.",
+        "direccion": "Hijuelas",
+        "horario": "Todos los días 8:00 - 20:00",
+        "precio": "Gratuito / Según actividad",
+        "contacto": "",
+        "sitio_web": "https://hijuelas.cl/espacios-publicos/parque-municipal-los-naranjos/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 9,
+    "fields": {
+        "nombre": "Palmas de Ocoa",
+        "zona": 6,
+        "categoria": 1,
+        "comuna": "Hijuelas",
+        "resumen": "Extenso bosque de Palma Chilena en el interior",
+        "descripcion": "Sector del Parque Nacional La Campana en el Valle de Ocoa, que alberga la mayor concentración de la amenazada Palma Chilena (Jubaea chilensis) con senderos panorámicos.",
+        "direccion": "Hijuelas",
+        "horario": "Mar a Dom 9:00 - 17:30 (Lun cerrado)",
+        "precio": "Tarifa CONAF",
+        "contacto": "",
+        "sitio_web": "https://www.conaf.cl/parque_nacionales/parque-nacional-la-campana/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 10,
+    "fields": {
+        "nombre": "Termas el Corazon",
+        "zona": 5,
+        "categoria": 6,
+        "comuna": "San Esteban",
+        "resumen": "Aguas termales y relajación al pie de los Andes",
+        "descripcion": "Complejo termal rodeado por los imponentes cerros de la precordillera andina. Ofrece pozones de aguas minerales, senderos de montaña y un microclima privilegiado.",
+        "direccion": "Dr. Antonio Bianchini 2156, San Esteban",
+        "horario": "Abierto todo el año (requiere reserva)",
+        "precio": "Según servicio o estadía",
+        "contacto": "(34) 243 6600",
+        "sitio_web": "https://www.termaselcorazon.cl/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 11,
+    "fields": {
+        "nombre": "San Francisco Lodge & Spa",
+        "zona": 5,
+        "categoria": 6,
+        "comuna": "San Esteban",
+        "resumen": "Valle andino con esteros y senderos de alta montaña",
+        "descripcion": "Refugio ubicado en los valles interiores de San Esteban, rodeado de vegetación nativa y ríos de deshielo andino. Excelente para actividades al aire libre y desconexión.",
+        "direccion": "Ruta E-753, San Esteban",
+        "horario": "Consultar por día o estadía",
+        "precio": "Según paquete o actividad",
+        "contacto": "9 8778 7121",
+        "sitio_web": "https://sflodge.cl/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 12,
+    "fields": {
+        "nombre": "Santuario de la Naturaleza Serranía El Ciprés",
+        "zona": 4,
+        "categoria": 1,
+        "comuna": "San Felipe",
+        "resumen": "Reserva montañosa de Cipreses de la Cordillera",
+        "descripcion": "Área protegida de alta montaña dedicada a la conservación del ciprés de la cordillera. Sus senderos ofrecen vistas panorámicas completas del Valle del Aconcagua.",
+        "direccion": "El Asiento, San Felipe",
+        "horario": "Todos los días 8:00 - 18:00",
+        "precio": "Consultar en administración",
+        "contacto": "9 7413 3174",
+        "sitio_web": "https://serraniaelcipres.cl/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 13,
+    "fields": {
+        "nombre": "Termas de Jahuel Hotel & Spa",
+        "zona": 4,
+        "categoria": 6,
+        "comuna": "San Felipe",
+        "resumen": "Histórico oasis termal y spa entre cerros",
+        "descripcion": "Tradicional centro termal inmerso en un entorno rural tranquilo, con aguas termales curativas, extensos jardines y senderos por el precordillerano Valle de Aconcagua.",
+        "direccion": "Balneario de Jahuel, San Felipe",
+        "horario": "Abierto todo el año",
+        "precio": "Según programa o estadía",
+        "contacto": "(2) 2411 1720",
+        "sitio_web": "https://jahuel.cl/es/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 14,
+    "fields": {
+        "nombre": "Playa Pichidangui",
+        "zona": 2,
+        "categoria": 2,
+        "comuna": "Pichidangui",
+        "resumen": "Bahía en forma de media luna de aguas turquesas",
+        "descripcion": "Bahía protegida de oleaje suave y aguas verde-turquesa en el límite norte de la región, ideal para la práctica de stand-up paddle, kayak o descanso costero tranquilo.",
+        "direccion": "Abierto 24 horas",
+        "horario": "Gratuito",
+        "precio": "Gratuito",
+        "contacto": "",
+        "sitio_web": "https://www.playasdechile.com/playa-pichidangui/",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 15,
+    "fields": {
+        "nombre": "Caleta De Pescadores Pichidangui",
+        "zona": 2,
+        "categoria": 2,
+        "comuna": "Pichidangui",
+        "resumen": "Pintoresca caleta de pescadores y cueva marina",
+        "descripcion": "Caleta tradicional con ritmo apacible. Hacia los acantilados del sur alberga cóncavos rocosos y cuevas marinas explorables durante la marea baja.",
+        "direccion": "Pichidangui",
+        "horario": "Abierto 24 horas",
+        "precio": "Gratuito",
+        "contacto": "9 8389 4150",
+        "sitio_web": "",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 16,
+    "fields": {
+        "nombre": "Puna Pau",
+        "zona": 8,
+        "categoria": 1,
+        "comuna": "Isla de Pascua",
+        "resumen": "Cantera ancestral de escoria roja (Pukao)",
+        "descripcion": "Pequeño cráter volcánico donde los antiguos habitantes tallaban los rodetes o moños rojos (Pukao) de los Moai. Menos frecuentado y envuelto en una atmósfera muy serena.",
+        "direccion": "Isla de Pascua",
+        "horario": "Todos los días 9:00 - 17:30",
+        "precio": "Pase de Parque Nacional Rapa Nui",
+        "contacto": "",
+        "sitio_web": "",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+},
+{
+    "model": "lugares.lugar",
+    "pk": 17,
+    "fields": {
+        "nombre": "Ana Te Pahu",
+        "zona": 8,
+        "categoria": 1,
+        "comuna": "Isla de Pascua",
+        "resumen": "Laberinto subterráneo de tubos volcánicos",
+        "descripcion": "Enorme sistema de cuevas subterráneas originado por tubos de lava. En su interior conserva vegetación natural y vestigios del antiguo uso como refugio y cultivo de los Rapa Nui.",
+        "direccion": "Hanga Roa, Isla de Pascua",
+        "horario": "Abierto 24 horas",
+        "precio": "Pase de Parque Nacional Rapa Nui",
+        "contacto": "",
+        "sitio_web": "",
+        "fuente": "",
+        "como_llegar": "",
+        "revisado": "2026-10-29",
+        "destacado": false,
+        "imagen": ""
+    }
+}
+]
