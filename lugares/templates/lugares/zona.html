@@ -1,7 +1,17 @@
 {% extends "lugares/base.html" %}
 {% block titulo %}{{ zona.nombre }}{% endblock %}
 
-{% block contenido %}
+{% block content %}
+
+<!-- MENÚ DE NAVEGACIÓN ENTRE PROVINCIAS -->
+<nav class="navegacion-zonas">
+    {% for z in zonas %}
+        <a href="{% url 'zona' z.id %}" {% if z.id == zona.id %}class="zona-activa"{% endif %}>
+            {{ z.nombre }}
+        </a>
+    {% endfor %}
+</nav>
+
 <h1>{{ zona.nombre }}</h1>
 <p>{{ zona.frase }}</p>
 <p>{{ zona.descripcion }}</p>

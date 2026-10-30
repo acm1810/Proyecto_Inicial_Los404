@@ -176,3 +176,34 @@ form button:hover {
     background-color: #0F5E7A;
     color: #FFFFFF;
 }
+
+/* --- MENÚ DE NAVEGACIÓN ENTRE ZONAS --- */
+.navegacion-zonas {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #E1E8EC;
+    overflow-x: auto; /* Por si las zonas no caben en pantallas chicas, se pueden deslizar */
+}
+
+.navegacion-zonas a {
+    text-decoration: none;
+    color: #4D6170; /* Gris texto oficial */
+    font-family: "Figtree", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 6px 0;
+    transition: color 0.2s ease;
+}
+
+.navegacion-zonas a:hover {
+    color: #0F5E7A; /* Azul océano al pasar el mouse */
+}
+
+/* Estilo para la provincia en la que estás parado actualmente */
+.navegacion-zonas a.zona-activa {
+    color: #0D2433; /* Azul noche oficial */
+    font-weight: 700;
+    border-bottom: 3px solid #FFC531; /* Línea amarilla abajo al estilo pestaña */
+}

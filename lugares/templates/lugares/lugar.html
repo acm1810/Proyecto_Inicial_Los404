@@ -1,7 +1,7 @@
 {% extends "lugares/base.html" %}
 {% block titulo %}{{ lugar.nombre }}{% endblock %}
 
-{% block contenido %}
+{% block content %}
 <a href="{% url 'zona' lugar.zona.id %}">Volver a {{ lugar.zona.nombre }}</a>
 
 {% if lugar.imagen %}
