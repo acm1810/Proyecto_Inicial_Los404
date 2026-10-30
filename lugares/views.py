@@ -75,4 +75,4 @@ def zona(request, id):
 
 def lugar_detalle(request, pk):
     lugar = get_object_or_404(Lugar, pk=pk)
-    return render(request, 'lugares/lugar.html', {'lugar': logo})
+    return render(request, 'lugares/lugar.html', {'lugar': lugar})
