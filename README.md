@@ -37,22 +37,20 @@ Reducir la concentración turística en los cerros y sectores más populares, pr
 # Instalación y Ejecución Local
 
 ### 1. Prerrequisitos y Dependencias
-Tener instalado Python
-Clonar el repositorio
-Configurar/Crear un entorno virtual (Para crear: python -m venv venv. Para activar: .\venv\Scripts\activate)
+- Tener instalado Python
+- Clonar el repositorio
+- Configurar/Crear un entorno virtual (Para crear: python -m venv venv. Para activar: .\venv\Scripts\activate)
 Instalar dependencias necesarias del proyecto (pip install -r requirements.txt)
 
-### 2. Configuración de la Base de Datos y Datos Iniciales
-python manage.py migrate
-python manage.py loaddata datos.json
+### 2. Sincronizar el código desde github usando una nueva terminal
+Abrir una nueva terminal y agregar: 
+- git fetch origin
+- git checkout main
+- git pull origin main
 
-### 3. Configuración de Archivos Estáticos y Multimedia (urls.py)
-from django.conf import settings
-from django.conf.urls.static import static
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+### 3. Probar datos iniciales
+- python manage.py loaddata datos.json
     
 ### 4. Iniciar el Servidor de Desarrollo
-python manage.py runserver
-Una vez iniciado, con ctrl + click entrar a http://127.0.0.1:8000/
+- python manage.py runserver 
+- Una vez iniciado, con ctrl + click entrar a http://127.0.0.1:8000/
