@@ -16,14 +16,8 @@ Reducir la concentración turística en los cerros y sectores más populares, pr
 - Filtrado dinámico por categorías de servicios y atractivos turísticos.
 - Fichas detalladas de cada lugar con fotografías, descripciones y datos prácticos 
 - Buscador contextual por palabras clave y comunas.
-  
-# Planificación inicial
-- Semana 1: Validación del problema con usuarios.
-- Semana 2: Revisión y ajuste de funcionalidades.
-- Semana 3: Prototipo inicial en Figma.
-- Semana 4: Pruebas de concepto y reporte.
 
-# Prototipo en Figma
+# Prototipo en Canva
 - https://www.canva.com/design/DAHWzLyL2V0/LwoZ_RdiCF6ZNGmivJAATA/view?mode=prototype
 
 # Integrantes
@@ -32,10 +26,31 @@ Reducir la concentración turística en los cerros y sectores más populares, pr
 - Estefania Salinas  
 - Yutong Sun
 
-## 🛠️ Tecnologías utilizadas
+# Tecnologías utilizadas
 * Python 3.13.14
 * Django 6.1.2
 * Pillow 13.0.0
 * asgiref 3.12.1
 * sqlparse 0.6.0
 * tzdata 2026.5
+
+# Instalación y Ejecución Local
+
+### 1. Prerrequisitos y Dependencias
+- Tener instalado Python
+- Clonar el repositorio
+- Configurar/Crear un entorno virtual (Para crear: python -m venv venv. Para activar: .\venv\Scripts\activate)
+Instalar dependencias necesarias del proyecto (pip install -r requirements.txt)
+
+### 2. Sincronizar el código desde github usando una nueva terminal
+Abrir una nueva terminal y agregar: 
+- git fetch origin
+- git checkout main
+- git pull origin main
+
+### 3. Probar datos iniciales
+- python manage.py loaddata datos.json
+    
+### 4. Iniciar el Servidor de Desarrollo
+- python manage.py runserver 
+- Una vez iniciado, con ctrl + click entrar a http://127.0.0.1:8000/
