@@ -1,25 +1,288 @@
-<form method="GET" action="{% url 'inicio' %}" class="busqueda-form">
-    <input type="text" name="q" placeholder="Buscar atractivo o palabra clave..." value="">
+{% extends 'lugares/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    /* ==========================================
+       ESTILOS DEL COLLAGE Y PORTADA
+       ========================================== */
+    .valpo-welcome-section {
+        max-width: 1050px;
+        margin: 1.5rem auto 2.5rem auto;
+        padding: 1.5rem;
+        background: #fafafa;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .valpo-main-title {
+        color: #008080;
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 1.2rem;
+        letter-spacing: 0.5px;
+    }
+
+    .valpo-grid-container {
+        display: grid;
+        grid-template-columns: 1.2fr 0.9fr 1.1fr;
+        gap: 1.2rem;
+        align-items: start;
+    }
+
+    .valpo-col-left { position: relative; }
+    .valpo-img-wrapper { border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .valpo-img-large { width: 100% !important; height: 270px !important; object-fit: cover !important; border-radius: 10px; display: block; }
     
-    <select name="zona">
-        <option value="">Todas las Zonas</option>
-        {% for z in zonas %}
-            <option value="{{ z.id }}" {% if zona_id == z.id|stringformat:"s" %}selected{% endif %}>
-                {{ z.nombre }}
-            </option>
-        {% endfor %}
-    </select>
+    .valpo-col-center { position: relative; height: 270px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .valpo-img-tall { width: 100% !important; height: 270px !important; object-fit: cover !important; border-radius: 10px; display: block; }
+    
+    .valpo-col-right { display: flex; flex-direction: column; gap: 0.8rem; position: relative; }
+    .valpo-img-stack { position: relative; display: flex; flex-direction: column; gap: 0.6rem; }
+    .valpo-img-small { width: 100% !important; height: 90px !important; object-fit: cover !important; border-radius: 8px; display: block; box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
 
-    <select name="categoria">
-        <option value="">Todas las Categorías</option>
-        {% for cat in categorias %}
-            <option value="{{ cat.id }}" {% if categoria_id == cat.id|stringformat:"s" %}selected{% endif %}>
-                {{ cat.nombre }}
-            </option>
-        {% endfor %}
-    </select>
+    .valpo-text-block {
+        position: relative;
+        background: #ffffff;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        border-left: 4px solid #008080;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
 
-    <button type="submit">Buscar</button>
-</form>
+    .valpo-text-block p { color: #4a5568; font-size: 0.88rem; line-height: 1.45; margin: 0; }
 
-<p><strong>Resultados encontrados:</strong> {{ total_resultados }}</p>
+    /* Stickers SVG */
+    .heart-blue {
+        position: absolute; bottom: -14px; left: -14px; width: 44px; height: 44px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%232563eb' d='M50 88 C20 65 5 45 5 28 C5 12 18 3 32 3 C41 3 47 8 50 14 C53 8 59 3 68 3 C82 3 95 12 95 28 C95 45 80 65 50 88 Z'/%3E%3C/svg%3E");
+        background-size: contain; background-repeat: no-repeat; filter: drop-shadow(0px 3px 5px rgba(37, 99, 235, 0.4)); z-index: 10;
+    }
+
+    .star-red {
+        position: absolute; top: 10px; right: -16px; width: 44px; height: 44px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ff4d4d' d='M50 0 L58 35 L93 25 L68 50 L93 75 L58 65 L50 100 L42 65 L7 75 L32 50 L7 25 L42 35 Z'/%3E%3C/svg%3E");
+        background-size: contain; background-repeat: no-repeat; filter: drop-shadow(0px 3px 5px rgba(255, 77, 77, 0.4)); z-index: 10;
+    }
+
+    .sticker-sparkle {
+        position: absolute; bottom: -12px; right: -12px; width: 38px; height: 38px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%2306b6d4' d='M50 0 Q50 50 100 50 Q50 50 50 100 Q50 50 0 50 Q50 50 50 0 Z'/%3E%3C/svg%3E");
+        background-size: contain; background-repeat: no-repeat; filter: drop-shadow(0px 3px 5px rgba(6, 182, 212, 0.4)); z-index: 10;
+    }
+
+    .sun-yellow {
+        position: absolute; top: 20px; right: -16px; width: 42px; height: 42px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='24' fill='%23ffcc00'/%3E%3Cpath stroke='%23ffa500' stroke-width='6' stroke-linecap='round' d='M50 10 V18 M50 82 V90 M10 50 H18 M82 50 H90 M22 22 L28 28 M72 72 L78 78 M22 78 L28 72 M72 22 L78 28'/%3E%3C/svg%3E");
+        background-size: contain; background-repeat: no-repeat; filter: drop-shadow(0px 3px 6px rgba(255, 204, 0, 0.5)); z-index: 10;
+    }
+
+    .sticker-smile {
+        position: absolute; bottom: -10px; right: 15px; width: 34px; height: 34px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2310b981'/%3E%3Ccircle cx='35' cy='40' r='6' fill='%23ffffff'/%3E%3Ccircle cx='65' cy='40' r='6' fill='%23ffffff'/%3E%3Cpath d='M30 60 Q50 80 70 60' stroke='%23ffffff' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-size: contain; background-repeat: no-repeat; filter: drop-shadow(0px 3px 5px rgba(16, 185, 129, 0.4)); z-index: 10;
+    }
+
+    /* ==========================================
+       BARRA DE BÚSQUEDA Y MENSAJE CENTRADOS
+       ========================================== */
+    .busqueda-container-centered {
+        max-width: 1050px;
+        margin: 2rem auto 1.5rem auto;
+        padding: 0 1rem;
+        text-align: center;
+    }
+
+    .busqueda-form-custom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .input-clear-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 380px;
+        max-width: 100%;
+    }
+
+    .input-clear-wrapper input {
+        width: 100%;
+        height: 44px;
+        padding: 0 35px 0 14px !important;
+        font-size: 0.95rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .clear-search-btn {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.2rem;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+        width: 20px;
+        z-index: 5;
+    }
+
+    .clear-search-btn:hover {
+        color: #e53e3e;
+    }
+
+    .busqueda-form-custom select,
+    .busqueda-form-custom button {
+        height: 44px;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    /* Recuadro de "No encontrado" justo abajo de la barra */
+    .no-results-box {
+        background-color: #fff5f5;
+        border: 1px solid #feb2b2;
+        color: #c53030;
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        width: 100%;
+        margin-top: 1.2rem;
+        box-sizing: border-box;
+    }
+
+    /* Grilla de Resultados */
+    .tarjetas-seccion-equipo { max-width: 1050px; margin: 2rem auto 3rem auto; padding: 0 1rem; }
+    .grid-lugares-equipo { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; gap: 2rem !important; }
+    .card-lugar-item { background: #ffffff; border-radius: 10px; overflow: hidden; border: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .card-lugar-item img { width: 100% !important; height: 180px !important; object-fit: cover !important; display: block; }
+    .card-lugar-body { padding: 1rem; text-align: left; }
+    .card-lugar-body h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #2c3e50; }
+    .card-lugar-body p { font-size: 0.9rem; color: #666; line-height: 1.4; margin-bottom: 1rem; }
+</style>
+
+<!-- 1. BARRA DE BÚSQUEDA Y AVISO INMEDIATO -->
+<div class="busqueda-container-centered">
+    <form method="GET" action="{% url 'inicio' %}" class="busqueda-form-custom">
+        <div class="input-clear-wrapper">
+            <input type="text" name="q" placeholder="Buscar atractivo o palabra clave..." value="{{ query }}">
+            {% if query %}
+                <a href="{% url 'inicio' %}" class="clear-search-btn" title="Limpiar búsqueda">&times;</a>
+            {% endif %}
+        </div>
+        
+        <select name="zona">
+            <option value="">Todas las Zonas</option>
+            {% for z in zonas %}
+                <option value="{{ z.id }}" {% if zona_id == z.id|stringformat:"s" %}selected{% endif %}>
+                    {{ z.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <select name="categoria">
+            <option value="">Todas las Categorías</option>
+            {% for cat in categorias %}
+                <option value="{{ cat.id }}" {% if categoria_id == cat.id|stringformat:"s" %}selected{% endif %}>
+                    {{ cat.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!-- MENSAJE DE CONTADOR O ALERTA (JUSTO ABAJO DEL BUSCADOR) -->
+    {% if query or categoria_id %}
+        {% if total_resultados == 0 %}
+            <div class="no-results-box">
+                {% if query %}
+                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.2rem;">No se encontró nada para "{{ query }}"</h3>
+                    <p style="margin: 0;">Comprueba la ortografía o intenta buscar otra palabra clave.</p>
+                {% else %}
+                    <h3 style="margin: 0;">No se encontraron lugares en esta categoría.</h3>
+                {% endif %}
+            </div>
+        {% else %}
+            <div style="margin-top: 1rem; margin-bottom: 1.5rem; font-size: 0.95rem; text-align: center;">
+                {% if query %}
+                    <p>Mostrando resultados para: <strong>"{{ query }}"</strong> ({{ total_resultados }} encontrados)</p>
+                {% else %}
+                    <p><strong>Resultados encontrados:</strong> {{ total_resultados }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+
+<!-- 2. PORTADA DE BIENVENIDA (SOLO APARECE SI NO HAY BÚSQUEDA ACTIVA) -->
+{% if not query and not categoria_id %}
+<section class="valpo-welcome-section">
+    <h1 class="valpo-main-title">¡BIENVENID@ A VALPARAÍSO!</h1>
+
+    <div class="valpo-grid-container">
+        <div class="valpo-col-left">
+            <div class="valpo-img-wrapper">
+                <img src="/media/lugares/valpo1.jpg" alt="Valparaíso Casas" class="valpo-img-large">
+            </div>
+            <div class="heart-blue"></div>
+            <div class="star-red"></div>
+        </div>
+
+        <div class="valpo-col-center">
+            <img src="/media/lugares/valpo2.jpg" alt="Mirador Valparaíso" class="valpo-img-tall">
+            <div class="sticker-sparkle"></div>
+        </div>
+
+        <div class="valpo-col-right">
+            <div class="valpo-img-stack">
+                <img src="/media/lugares/valpo3.jpg" alt="Edificio Valparaíso" class="valpo-img-small">
+                <img src="/media/lugares/valpo4.webp" alt="Escalera Mural" class="valpo-img-small">
+                <div class="sun-yellow"></div>
+            </div>
+            
+            <div class="valpo-text-block">
+                <p>¿Te gustaría descubrir destinos ocultos en la V región Chilena? ¡Nuestras sugerencias te van a fascinar! Te invitamos a darle un vistazo a nuestro catálogo, personaliza tus preferencias y visualiza tu viaje ideal.</p>
+                <div class="sticker-smile"></div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- 3. GRILLA DE TARJETAS (SE MUESTRA DIRECTO ABAJO DEL BUSCADOR AL BUSCAR) -->
+{% if query or categoria_id %}
+    {% if total_resultados > 0 %}
+    <section class="tarjetas-seccion-equipo">
+        <div class="grid-lugares-equipo">
+            {% for lugar in lugares %}
+                <article class="card-lugar-item">
+                    {% if lugar.imagen %}
+                        <img src="{{ lugar.imagen.url }}" alt="{{ lugar.nombre }}">
+                    {% else %}
+                        <img src="/media/lugares/valpo1.jpg" alt="Imagen por defecto">
+                    {% endif %}
+                    <div class="card-lugar-body">
+                        <h3>{{ lugar.nombre }}</h3>
+                        <p>{{ lugar.descripcion|truncatewords:20 }}</p>
+                        <a href="{% url 'lugar' lugar.id %}" class="btn-secondary">Más detalles</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+{% endif %}
+{% endblock %}

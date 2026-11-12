@@ -2,7 +2,22 @@
 {% block titulo %}{{ zona.nombre }}{% endblock %}
 
 {% block content %}
-
+<!-- BOTÓN VOLVER AL INICIO (FLECHA NEGRA GUATONA Y PEGADA A LA IZQUIERDA) -->
+<div style="width: 100%; padding-left: 0.8rem; margin-top: 1rem; margin-bottom: 0.5rem; text-align: left; box-sizing: border-box;">
+    <a href="{% url 'inicio' %}" title="Volver al Inicio" style="
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #000000;
+        text-decoration: none;
+        font-size: 1.8rem;
+        font-weight: 900;
+        line-height: 1;
+        transition: transform 0.15s ease, opacity 0.2s ease;
+    " onmouseover="this.style.opacity='0.6'; this.style.transform='translateX(-4px)'" onmouseout="this.style.opacity='1'; this.style.transform='translateX(0)'">
+        &#129144; <!-- Flecha gruesa hacia la izquierda -->
+    </a>
+</div>
 <!-- MENÚ DE NAVEGACIÓN ENTRE PROVINCIAS -->
 <nav class="navegacion-zonas">
     {% for z in zonas %}
