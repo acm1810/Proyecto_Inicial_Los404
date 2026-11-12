@@ -1,27 +1,131 @@
-{% extends "lugares/base.html" %}
-{% block titulo %}{{ lugar.nombre }}{% endblock %}
+{% extends 'lugares/base.html' %}
+{% load static %}
 
 {% block content %}
-<a href="{% url 'zona' lugar.zona.id %}">Volver a {{ lugar.zona.nombre }}</a>
+<!-- 1. LIBRERÍA GRATUITA DE MAPAS (LEAFLET) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-{% if lugar.imagen %}
-    <img src="{{ lugar.imagen.url }}" alt="{{ lugar.nombre }}">
-{% endif %}
+<!-- 2. FLECHA NEGRA GUATONA PARA VOLVER -->
+<div style="width: 100%; padding-left: 0.8rem; margin-top: 1rem; margin-bottom: 0.5rem; text-align: left; box-sizing: border-box;">
+    {% if lugar.zona %}
+        <a href="{% url 'zona' lugar.zona.id %}" title="Volver a {{ lugar.zona.nombre }}" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 900;
+            line-height: 1;
+            transition: transform 0.15s ease, opacity 0.2s ease;
+        " onmouseover="this.style.opacity='0.6'; this.style.transform='translateX(-4px)'" onmouseout="this.style.opacity='1'; this.style.transform='translateX(0)'">
+            &#129144;
+        </a>
+    {% else %}
+        <a href="{% url 'inicio' %}" title="Volver al Inicio" style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 900;
+            line-height: 1;
+            transition: transform 0.15s ease, opacity 0.2s ease;
+        " onmouseover="this.style.opacity='0.6'; this.style.transform='translateX(-4px)'" onmouseout="this.style.opacity='1'; this.style.transform='translateX(0)'">
+            &#129144;
+        </a>
+    {% endif %}
+</div>
 
-<h1>{{ lugar.nombre }}</h1>
-<p>{{ lugar.categoria.nombre }} · {{ lugar.comuna }}</p>
-<p>{{ lugar.descripcion }}</p>
+<!-- 3. DETALLE DEL LUGAR -->
+<div style="max-width: 650px; margin: 0 auto; padding: 0 1rem; text-align: center;">
+    <h1 style="color: #2c3e50; font-size: 2rem; margin-bottom: 1rem;">{{ lugar.nombre }}</h1>
+    
+    {% if lugar.imagen %}
+        <img src="{{ lugar.imagen.url }}" alt="{{ lugar.nombre }}" style="
+            max-width: 650px;
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+            margin: 1rem auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        ">
+    {% endif %}
 
-<!-- Sección Planifica tu visita -->
-{% if lugar.direccion %}<p>Dirección: {{ lugar.direccion }}</p>{% endif %}
-{% if lugar.horario %}<p>Horario: {{ lugar.horario }}</p>{% endif %}
-{% if lugar.precio %}<p>Precio: {{ lugar.precio }}</p>{% endif %}
-{% if lugar.contacto %}<p>Contacto: {{ lugar.contacto }}</p>{% endif %}
+    <p style="font-size: 1rem; color: #4a5568; line-height: 1.6; text-align: justify; margin-top: 1.5rem;">
+        {{ lugar.descripcion }}
+    </p>
 
-<!-- Botón de Google Maps automático -->
-{% if lugar.direccion %}
-<a href="https://google.com{{ lugar.direccion|urlencode }}" target="_blank">
-    Ver en Google Maps
-</a>
-{% endif %}
+    <!-- 4. MAPA INTERACTIVO -->
+    <div style="margin: 2.5rem 0 1.5rem 0; text-align: left;">
+        <h3 style="font-size: 1.2rem; color: #008080; margin-bottom: 0.8rem; font-weight: bold;">
+            📍 Ubicación en el mapa:
+        </h3>
+        <div id="mapa-lugar" style="height: 320px; width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); border: 1px solid #e0e0e0;"></div>
+    </div>
+</div>
+
+<!-- 5. SCRIPT DE CONSULTA DE LA API DE MAPAS (GEOCODING EN TIEMPO REAL) -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Coordenadas iniciales por defecto (Valparaíso)
+        var latDefecto = -33.0472;
+        var lngDefecto = -71.6127;
+
+        var map = L.map('mapa-lugar').setView([latDefecto, lngDefecto], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Construir la consulta de búsqueda para la API
+        var nombreLugar = "{{ lugar.nombre|escapejs }}";
+        var comunaLugar = "{{ lugar.comuna|default:''|escapejs }}";
+        var queryDireccion = nombreLugar + ", " + comunaLugar + ", Chile";
+
+        // Consumo de la API gratuita de geocodificación Nominatim (OpenStreetMap)
+        fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(queryDireccion))
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    var exactLat = parseFloat(data[0].lat);
+                    var exactLng = parseFloat(data[0].lon);
+
+                    // Mover el mapa y colocar el pin en la ubicación exacta encontrada
+                    map.setView([exactLat, exactLng], 14);
+                    L.marker([exactLat, exactLng]).addTo(map)
+                        .bindPopup('<b>' + nombreLugar + '</b>')
+                        .openPopup();
+                } else {
+                    // Si no encuentra el lugar exacto por nombre, busca por comuna
+                    fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(comunaLugar + ", Chile"))
+                        .then(res => res.json())
+                        .then(comunaData => {
+                            if (comunaData && comunaData.length > 0) {
+                                var cLat = parseFloat(comunaData[0].lat);
+                                var cLng = parseFloat(comunaData[0].lon);
+                                map.setView([cLat, cLng], 12);
+                                L.marker([cLat, cLng]).addTo(map)
+                                    .bindPopup('<b>' + nombreLugar + '</b>')
+                                    .openPopup();
+                            } else {
+                                // Pin en ubicación base
+                                L.marker([latDefecto, lngDefecto]).addTo(map)
+                                    .bindPopup('<b>' + nombreLugar + '</b>')
+                                    .openPopup();
+                            }
+                        });
+                }
+            })
+            .catch(err => {
+                L.marker([latDefecto, lngDefecto]).addTo(map)
+                    .bindPopup('<b>' + nombreLugar + '</b>')
+                    .openPopup();
+            });
+    });
+</script>
 {% endblock %}
